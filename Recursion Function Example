@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+class Scratch {
+    public static int ears(int nb)
+    {
+        if(nb==0)
+        {
+           return 0;
+        }
+      return 2+ears(nb-1) ;
+
+    }
+    public static void main(String[] args)
+    {
+        System.out.println("Enter the number of bunnies:");
+        Scanner no = new Scanner(System.in);
+        int nb = no.nextInt();
+        System.out.println("Number of ears the bunnies have:");
+        System.out.println(ears(nb));
+        
+    }
+}
