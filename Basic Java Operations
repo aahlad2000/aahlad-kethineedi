@@ -1,0 +1,60 @@
+public class StatixExplain {
+    int a;
+    static int b;
+    public StatixExplain() {
+
+    }
+    public StatixExplain(int para) {
+        this.a = para*para;
+    }
+
+    public void setA(int para1){
+        this.a = para1;
+    }
+    public int getA(){
+        return a;
+    }
+    public static void setB(int para2){
+        b = para2;
+    }
+    public static int getB(){
+        return b;
+    }
+}
+class example{
+    public void phone(){
+        StatixExplain obj = new StatixExplain(4);
+        obj.setA(6);
+        int w = obj.getA();
+        question(obj);
+    }
+    public void question(StatixExplain obj) {
+        int rs = obj.getA();
+        System.out.println(rs);
+    }
+    public static void main(String args[]){
+        StatixExplain.setB(77);
+        int r = StatixExplain.getB();
+        System.out.println(r);
+        example e = new example();
+        e.opera();
+        e.callFunction();
+
+    }
+
+    public static void santu() {
+
+    }
+    public void opera(){
+       int y= StatixExplain.getB();
+       System.out.println(y);
+    }
+
+    public void callFunction() {
+        StatixExplain er = new StatixExplain(3*3);
+    }
+
+    public int returnVar() {
+        return 3;
+    }
+}
