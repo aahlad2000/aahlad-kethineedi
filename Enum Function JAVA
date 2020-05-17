@@ -1,0 +1,9 @@
+enum Color{
+    Black, green, red
+}
+class test{
+    public static void main(String args[]){
+        Color my = Color.red;
+        System.out.println(my);
+    }
+}
