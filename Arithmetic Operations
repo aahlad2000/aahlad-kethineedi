@@ -1,0 +1,40 @@
+public class GoldController {
+   public int add(int para1,int para2){
+       int c = para1 + para2;
+       return c;
+   }
+    public int subtract(int para1,int para2){
+        int d = para1 - para2;
+        return d;
+    }
+   public int square(int para1){
+       int e = para1*para1;
+       return e;
+   }
+
+   public static int staticMul(int p, int q){
+       int res = p*q;
+       return res;
+
+
+   }
+
+}
+
+
+class Application {
+
+public static void main(String args[]){
+    GoldController obj = new GoldController();
+    int r = obj.add(3,4);
+    int y =obj.subtract(7,6);
+    int u = obj.square(2);
+    int o = GoldController.staticMul(5,6);
+    System.out.println(r+y+u+o);
+
+
+
+
+}
+
+}
