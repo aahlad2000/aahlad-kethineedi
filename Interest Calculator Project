@@ -1,0 +1,205 @@
+package com.jarosciak.interestcalculator;
+ 
+import javax.swing.*;
+ 
+import java.awt.*;
+ 
+import java.awt.event.ActionEvent;
+ 
+import java.awt.event.ActionListener;
+ 
+import java.text.DecimalFormat;
+ 
+import static javax.swing.JOptionPane.*;
+ 
+public class InterestCalculator {
+ 
+// Define static fields shared by methods
+ 
+private static JTextField textPrincipalAmount = new JTextField();
+ 
+private static JTextField textInterestRate = new JTextField();
+ 
+private static JTextField textTimePeriod = new JTextField();
+ 
+private static JButton calculateButton = new JButton();
+ 
+public static void main(String[] args) {
+ 
+// Create form
+ 
+createForm();
+ 
+// Add listener for button click
+ 
+calculateButton.addActionListener(new ActionListener() {
+ 
+public void actionPerformed(ActionEvent e) {
+// If all input fields entered
+ 
+if (!textPrincipalAmount.getText().isEmpty()
+ 
+&amp;&amp; !textInterestRate.getText().isEmpty()
+ 
+&amp;&amp; !textTimePeriod.getText().isEmpty()) {
+ 
+// And all input fields are numeric
+ 
+if ((isNumeric(textPrincipalAmount.getText()))
+ 
+&amp;&amp; (isNumeric(textInterestRate.getText()))
+ 
+&amp;&amp; (isNumeric(textTimePeriod.getText()))) {
+ 
+// Calculate Interest
+ 
+calculateInterest(
+ 
+Float.parseFloat(textPrincipalAmount.getText()),
+ 
+Float.parseFloat(textInterestRate.getText()),
+ 
+Short.parseShort(textTimePeriod.getText())
+ 
+);
+ 
+} else {
+ 
+showMessageDialog(null, &quot;Values must be in numeric form!&quot;, &quot;Warning&quot;,
+WARNING_MESSAGE);
+ 
+}
+ 
+} else {
+ 
+// If any of the input fields is not entered, show warning
+showMessageDialog(null, &quot;Please fill the form input fields!&quot;, &quot;Warning&quot;,
+WARNING_MESSAGE);
+ 
+}
+ 
+}
+ 
+});
+ 
+}
+ 
+public static boolean isNumeric(String str) {
+ 
+try {
+ 
+double d = Double.parseDouble(str);
+ 
+} catch (NumberFormatException nfe) {
+ 
+return false;
+ 
+}
+ 
+return true;
+ 
+}
+ 
+private static void calculateInterest(float P, float r, short t) {
+ 
+/*
+ 
+calculateInterest() method takes parameters in following order:
+ 
+P = principal amount
+ 
+r = rate of interest per year (or month) in decimal; r = R/100
+ 
+t = time period involved in years (or months)
+*/
+ 
+// Calculate total accrued amount principal + interest: A = P(1 + rt)
+ 
+float A = P * (1 + ((r / 100) * t));
+ 
+// Format
+ 
+DecimalFormat decimalFormatter = new DecimalFormat(&quot;#,##0.00&quot;);
+ 
+// Display Result
+ 
+showMessageDialog(null,
+ 
+&quot;Principal Amount: &quot; + decimalFormatter.format(P) + &quot;\n&quot;
+ 
++ &quot;Interest: &quot; + decimalFormatter.format(A - P) + &quot;\n&quot;
+ 
++ &quot;Total with Interest: &quot; + decimalFormatter.format(A), &quot;Result&quot;,
+PLAIN_MESSAGE);
+ 
+}
+ 
+private static void createForm() {
+ 
+// Create Form
+ 
+JFrame frame = new JFrame(&quot;Basic Interest Calculator&quot;); // title of the form
+ 
+JPanel panel = new JPanel();
+ 
+// Define Labels and Text Fields
+ 
+JLabel labelPrincipalAmount = new JLabel(&quot;Enter Principal Amount &quot;);
+ 
+JLabel labelInterestRate = new JLabel(&quot;Enter Yearly Interest Rate (%) &quot;);
+ 
+JLabel labelTimePeriod = new JLabel(&quot;Enter Time Period (years) &quot;);
+calculateButton.setText(&quot;Calculate Interest&quot;);
+ 
+// Input Form Attributes
+ 
+panel.setLayout(new GridBagLayout());
+ 
+panel.setBackground(Color.lightGray);
+ 
+frame.getContentPane().add(panel);
+ 
+GridBagConstraints left = new GridBagConstraints();
+ 
+left.anchor = GridBagConstraints.EAST;
+ 
+GridBagConstraints right = new GridBagConstraints();
+ 
+right.weightx = 2.0;
+ 
+right.fill = GridBagConstraints.HORIZONTAL;
+ 
+right.gridwidth = GridBagConstraints.REMAINDER;
+ 
+// Add labels and textboxes to panel
+ 
+panel.add(labelPrincipalAmount, left);
+ 
+panel.add(textPrincipalAmount, right);
+ 
+panel.add(labelInterestRate, left);
+ 
+panel.add(textInterestRate, right);
+ 
+panel.add(labelTimePeriod, left);
+ 
+panel.add(textTimePeriod, right);
+ 
+panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+//Add button to the bottom of the form
+ 
+frame.getContentPane().add(BorderLayout.SOUTH, calculateButton);
+ 
+// Set form attributes, make it visible and show
+ 
+frame.pack();
+ 
+frame.setSize(400, 180); // form size
+ 
+frame.setLocationRelativeTo(null); // Center form
+ 
+frame.setVisible(true);
+ 
+}
+ 
+}
