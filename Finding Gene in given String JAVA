@@ -1,0 +1,22 @@
+class scratch {
+    public String FindGeneSimple(String dna){
+        String s = "";
+        int startIndex = dna.indexOf("OT");
+        if(startIndex==-1){
+            return "";
+        }
+        int stopIndex = dna.indexOf("OP",startIndex + 2);
+        if(stopIndex==-1){
+            return "";
+        }
+        s = dna.substring(startIndex,stopIndex + 2);
+        return s;
+    }
+
+    public void testGeneSimple(){
+        String dna = "AATOTSHHJFHFAFHKHKSJOPJS";
+        System.out.println("The given string is :" +dna);
+        String gene = FindGeneSimple(dna);
+        System.out.println("The required string is :" +gene);
+    }
+}
